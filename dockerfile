@@ -1,16 +1,14 @@
-FROM node:erbium-alpine as installer
+FROM node:lts-alpine3.15 as build
 
 WORKDIR /app
-COPY . .
+
+COPY package.json package.json
+COPY package-lock.json package-lock.json
+
 RUN npm install
 
-FROM node:erbium-alpine
-
+FROM node:14.15.4-slim as base
 WORKDIR /app
-COPY --from=installer /app/node_modules ./node_modules
-COPY --from=installer /app/img/ ./img
-COPY --from=installer /app/test/ ./test
-COPY --from=installer /app/server.js ./server.js
-COPY --from=installer /app/package.json ./package.json
-
+COPY --from=build /app/node_modules ./node_modules
+COPY . .
 CMD ["npm", "start"]
