@@ -23,8 +23,8 @@ pipeline {
             }
             post {
                 success {
-                    sh 'docker build . -t davidamir94/itay_api_test:${BUILD_NUMBER}'
-                    sh 'docker push davidamir94/itay_api_test:${BUILD_NUMBER}'
+                    sh 'docker build . -t davidamir94/david_test:${BUILD_NUMBER}'
+                    sh 'docker push davidamir94/david_test:${BUILD_NUMBER}'
                 }
             }
         }
